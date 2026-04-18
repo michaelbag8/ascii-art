@@ -1,63 +1,53 @@
 package main
 
-import "fmt"
+import (
+    "fmt"
+    "os"
+    "strings"
+)
 
 func main() {
-	font := map[rune][]string{
-		'H': {
-			" _    _ ",
-			"| |  | |",
-			"| |__| |",
-			"|  __  |",
-			"| |  | |",
-			"| |  | |",
-			"|_|  |_|",
-			"        ",
-		},
-		'E': {
-			" ______ ",
-			"|  ____|",
-			"| |__   ",
-			"|  __|  ",
-			"| |____ ",
-			"|______|",
-			"        ",
-			"        ",
-		},
-		'L': {
-			" _      ",
-			"| |     ",
-			"| |     ",
-			"| |     ",
-			"| |____ ",
-			"|______|",
-			"        ",
-			"        ",
-		},
-		'O': {
-			"  ____  ",
-			" / __ \\ ",
-			"| |  | |",
-			"| |  | |",
-			"| |__| |",
-			" \\____/ ",
-			"        ",
-			"        ",
-		},
-	}
+    if len(os.Args) < 2 {
+        fmt.Println("Usage: go run main.go <text>")
+        return
+    }
 
-	input := "HELLO"
+    input := os.Args[1]
+    ascii, err := AsciiArt(input)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
 
-	height := 8
+    fmt.Print(ascii)
+}
 
-	for i := 0; i < height; i++ {
-		for _, ch := range input {
-			if letter, ok := font[ch]; ok {
-				fmt.Print(letter[i])
-			} else {
-				fmt.Print("        ")
-			}
-		}
-		fmt.Println()
-	}
+func AsciiArt(input string) (string, error) {
+    data, err := os.ReadFile("standard.txt")
+    if err != nil {
+        return "", fmt.Errorf("failed to read font file: %w", err)
+    }
+
+    lines := strings.Split(string(data), "\n")
+
+    
+    input = strings.ReplaceAll(input, `\n`, "\n")
+    input = strings.TrimRight(input, "\n")
+
+    words := strings.Split(input, "\n")
+    var result strings.Builder
+
+    for _, word := range words {
+        for line := 0; line < 8; line++ {
+            for _, char := range word {
+                index := int(char- ' ')*9 + 1 + line
+                if index >= 0 && index < len(lines) {
+                    result.WriteString(lines[index])
+                }
+            }
+            result.WriteByte('\n')
+        }
+    }
+
+    return result.String(), nil
 }
