@@ -4,10 +4,10 @@ import "testing"
 
 func TestValidate(t *testing.T) {
 	tests := []struct {
-		name      string
-		input     string
-		wantErr   bool
-		wantRune  rune
+		name     string
+		input    string
+		wantErr  bool
+		wantRune rune
 	}{
 		{
 			name:     "valid ascii string",
