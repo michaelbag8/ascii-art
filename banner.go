@@ -9,7 +9,7 @@ import (
 func LoadBanner(filename string) (map[rune][]string, error) {
 	data, err := os.ReadFile(filename)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading file\n")
+		fmt.Fprintf(os.Stderr, "Error reading file: %v\n", err)
 		return nil, err
 	}
 
