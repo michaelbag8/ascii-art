@@ -7,30 +7,17 @@ import (
 )
 
 func Generate(input string, banner map[rune][]string) string {
+	if len(input) == 0 {
+		return ""
+	}
 	var output strings.Builder
 	segments := SplitInput(input)
 
 	for i, segment := range segments {
 		if segment == "" {
-
-			if len(segments) == 1 {
-				return ""
-			}
-
-			if i < len(segments)-1 {
-				output.WriteString("\n")
-
-			}
-			if len(segments) == 2 && segments[0] == "" {
-				output.WriteString("\n")
-				return ""
-
-			}
-
-			if i == len(segments)-1 {
+			if i == 0 || segments[i-1] != "" {
 				output.WriteString("\n")
 			}
-
 			continue
 		}
 
@@ -45,6 +32,7 @@ func Generate(input string, banner map[rune][]string) string {
 		for _, row := range rows {
 			output.WriteString(row + "\n")
 		}
+
 	}
 	return output.String()
 }
