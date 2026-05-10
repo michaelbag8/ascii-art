@@ -203,6 +203,6 @@ Possible enhancements that i am currently working on:
 
 # Author
 
-Michael Bulus
+Michael BAG
 
 ---
