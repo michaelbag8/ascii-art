@@ -2,38 +2,30 @@ package main
 
 import (
 	"fmt"
-	"strings"
 	"os"
 )
 
 func main() {
-    if len(os.Args) < 2 {
-        return
-    }
+	if len(os.Args) < 2 || len(os.Args) > 3{
+		fmt.Fprintf(os.Stderr, "Usage: go run . text banner")
+		return
+	}
 
-    input := os.Args[1]
-    fmt.Print(AsciiArt(input))
-}
+	fontFile := "standard.txt"
 
-func AsciiArt(input string) string {
-    inputFile, err := os.ReadFile("standard.txt")
-    if err != nil {
-        fmt.Println("Error:", err)
-        return ""
-    }
+	if len(os.Args) == 3{
+		fontFile = os.Args[2] + ".txt"
+	}
 
-    inputFileLines := strings.Split(string(inputFile), "\n")
-    words := strings.Split(input, "\n")
-    result := ""
+	input := os.Args[1]
 
-    for _, word := range words {
-        for i := 0; i < 8; i++ {
-            for _, char := range word {
-                result += inputFileLines[i+(int(char-' ')*9)+1]
-            }
-            result += "\n"
-        }
-    }
+	data, err := LoadBanner(fontFile)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error ")
+		return
+	}
 
-    return result
+	content := Generate(input, data)
+	fmt.Print(content)
+
 }
