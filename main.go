@@ -18,12 +18,8 @@ func main() {
 		fmt.Fprintf(os.Stderr, "usage go run [--output=file.txt] <string> [banner]")
 		return
 	}
-	// if len(os.Args) < 2 || len(os.Args) > 3 {
-	// 	fmt.Fprintf(os.Stderr, "Usage: go run . text banner")
-	// 	return
-	// }
-
-	fontFile := "standard.txt"
+	
+	fontFile := "standard"
 	input := args[0]
 
 	if len(args) >=2{
