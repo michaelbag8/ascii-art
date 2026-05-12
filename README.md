@@ -189,6 +189,14 @@ This project helps you practice:
 
 ---
 
+| Flag                  | Description                                          |
+| --------------------- | ---------------------------------------------------- |
+| `--color=<color>`     | Changes ASCII art color                              |
+| `--output=<file>`     | Saves output into a file                             |
+| `--align=<type>`      | Aligns output (`left`, `right`, `center`, `justify`) |
+| `--letters=<letters>` | Applies color to specific letters                    |
+| `--reverse=<file>`    | Converts ASCII art back to text                      |
+
 # Future Improvements
 
 Possible enhancements that i am currently working on:
