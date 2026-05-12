@@ -9,7 +9,6 @@ import (
 func LoadBanner(filename string) (map[rune][]string, error) {
 	data, err := os.ReadFile(filename)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error reading file: %v\n", err)
 		return nil, err
 	}
 
@@ -18,7 +17,7 @@ func LoadBanner(filename string) (map[rune][]string, error) {
 	}
 
 	content := strings.ReplaceAll(string(data), "\r\n", "\n")
-	content = strings.TrimLeft(content, "\n")
+	content = strings.TrimPrefix(content, "\n")
 
 	rawFile := strings.Split(content, "\n\n")
 

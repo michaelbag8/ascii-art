@@ -30,7 +30,8 @@ func Generate(input string, banner map[rune][]string) string {
 
 		rows := renderLines(segment, banner)
 		for _, row := range rows {
-			output.WriteString(row + "\n")
+			output.WriteString(row)
+			output.WriteString("\n")
 		}
 
 	}
