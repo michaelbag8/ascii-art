@@ -11,6 +11,9 @@ func main() {
 	output := flag.String("output", "", "file to write output to")
 	color := flag.String("color", "", "colors: red, green, cyan ....")
 	letters := flag.String("letters", "", "specific letters to color")
+	_ = flag.String("align", "left", "alignment : center, right, left ...")
+	_ = flag.String("reverse", "", "ASCII art to change back to text")
+
 	flag.Parse()
 
 	args := flag.Args()
