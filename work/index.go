@@ -3,7 +3,7 @@ package main
 import (
 	//"flag"
 	"fmt"
-	"os"
+	//"os"
 	"strings"
 	//"strings"
 	//"os"
@@ -119,9 +119,12 @@ reset     := "\033[0m"
 
 for _, ch := range "Hello World"{
 	if letters == "" || strings.ContainsRune(letters, ch){
-		fmt.Printf("",colorCode, letters, reset)
+		fmt.Printf("%s%c%s",colorCode, ch, reset)
+	}else{
+		fmt.Printf("%c", ch)
 	}
 }
+fmt.Println()
 
 
 }
