@@ -28,7 +28,7 @@ func Generate(input string, banner map[rune][]string, colorCode string, letters 
 			}
 		}
 
-		rows := renderLines(segment, banner)
+		rows := renderLines(segment, banner, colorCode, letters)
 		for _, row := range rows {
 			output.WriteString(row)
 			output.WriteString("\n")

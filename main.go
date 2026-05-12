@@ -9,9 +9,21 @@ import (
 func main() {
 
 	output := flag.String("output", "", "file to write output to")
+	color := flag.String("color", "", "colors: red, green, cyan ....")
+	letters := flag.String("letters", "", "specific letters to color")
 	flag.Parse()
 
 	args := flag.Args()
+
+	colorCode := ""
+	if *color != ""{
+		code , exist := colorMap[*color]
+		if !exist{
+			fmt.Fprintf(os.Stderr, "unknown color %s\n", *color)
+			os.Exit(1)
+		}
+		colorCode = code
+	}
 
 	if len(args) < 1{
 		fmt.Fprintf(os.Stderr, "usage go run . [--output=file.txt] <string> [banner]")
@@ -31,7 +43,7 @@ func main() {
 		return
 	}
 
-	content := Generate(input, data)
+	content := Generate(input, data, colorCode, *letters)
 
 	if *output != "" {
 		err := os.WriteFile(*output, []byte(content), 0644)
