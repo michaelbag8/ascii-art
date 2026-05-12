@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Generate(input string, banner map[rune][]string) string {
+func Generate(input string, banner map[rune][]string, colorCode string, letters string) string {
 	if len(input) == 0 {
 		return ""
 	}
