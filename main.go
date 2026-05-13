@@ -19,16 +19,16 @@ func main() {
 	args := flag.Args()
 
 	colorCode := ""
-	if *color != ""{
-		code , exist := colorMap[*color]
-		if !exist{
+	if *color != "" {
+		code, exist := colorMap[*color]
+		if !exist {
 			fmt.Fprintf(os.Stderr, "unknown color %s\n", *color)
 			os.Exit(1)
 		}
 		colorCode = code
 	}
 
-	if len(args) < 1{
+	if len(args) < 1 {
 		fmt.Fprintf(os.Stderr, "usage go run . [--output=file.txt] <string> [banner]")
 		return
 	}
@@ -36,7 +36,7 @@ func main() {
 	fontFile := "standard"
 	input := args[0]
 
-	if len(args) >=2{
+	if len(args) >= 2 {
 		fontFile = args[1]
 	}
 

@@ -1,14 +1,14 @@
 package main
 
 import (
-    "os"
-    "golang.org/x/term"
+	"golang.org/x/term"
+	"os"
 )
 
 func getTermWidth() int {
-    width, _, err := term.GetSize(int(os.Stdout.Fd()))
-    if err != nil {
-        return 80 
-    }
-    return width
+	width, _, err := term.GetSize(int(os.Stdout.Fd()))
+	if err != nil {
+		return 80
+	}
+	return width
 }
