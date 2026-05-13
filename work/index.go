@@ -50,6 +50,29 @@ func alignText(art string, align string, termWidth, artWidth int) string {
 	}
 
 }
+var banner = map[rune][]string{
+    'H': {
+        "| |  | |",
+        "| |__| |",
+        "|  __  |",
+        "| |  | |",
+        "|_|  |_|",
+        "         ",
+        "         ",
+        "         ",
+    },
+    'i': {
+        " _ ",
+        "(_)",
+        " _ ",
+        "| |",
+        "|_|",
+        "   ",
+        "   ",
+        "   ",
+    },
+}
+
 
 func main() {
 	/*
@@ -165,7 +188,7 @@ func main() {
 		sp := Space(" ", 5)
 			fmt.Printf("%q\n",sp)
 
-	*/
+	
 	termWidth := 80
 	artWidth := 20
 	art := "***** HELLO *****"
@@ -175,4 +198,22 @@ func main() {
 	fmt.Println(alignText(art, l, termWidth, artWidth))
 	fmt.Println(alignText(art, c, termWidth, artWidth))
 	fmt.Println(alignText(art, j, termWidth, artWidth))
+	*/
+	
+artWidth := 0
+for _, ch := range "Hi"{
+	artWidth += len(banner[ch][0])
+
+}
+var arts strings.Builder
+for _, art := range banner{
+	for _, a := range art{
+		arts.WriteString(a)
+	}
+}
+	content := alignText(arts.String(), "left",80, artWidth)
+	
+		fmt.Println(content)
+	
+	
 }
