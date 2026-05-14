@@ -17,9 +17,12 @@ func Generate(input string, banner map[rune][]string, colorCode string, letters 
 
 	for i, segment := range segments {
 		if segment == "" {
-			if i == 0 || segments[i-1] != "" {
+			if i < len(segments)-1{
 				output.WriteString("\n")
 			}
+			// if i == 0 || segments[i-1] != "" {
+			// 	output.WriteString("\n")
+			// }
 			continue
 		}
 artWidth := 0
@@ -39,6 +42,9 @@ for _, ch := range segment {
 			output.WriteString(row)
 			output.WriteString("\n")
 		}
+		if i < len(segments)-1{
+				output.WriteString("\n")
+			}
 
 	}
 	return output.String()
