@@ -43,7 +43,7 @@ func alignText(art string, align string, termWidth, artWidth int) string {
 		return padding + art
 	case "center":
 		padding := strings.Repeat(" ", (termWidth-artWidth)/2)
-		return padding + art + padding
+		return padding + art
 	default:
 		return art
 
@@ -76,146 +76,182 @@ var banner = map[rune][]string{
 
 func main() {
 	/*
-				output := flag.String("output", "", "file to write to")
-				color := flag.String("color", "", "colors: red, green, cyan ....")
-				align := flag.String("align", "left", "alignment : center, right, left ...")
-				reverse := flag.String("reverse", "", "ASCII art to change back to text")
-				letters := flag.String("letter", "", "specific letters to color")
+					output := flag.String("output", "", "file to write to")
+					color := flag.String("color", "", "colors: red, green, cyan ....")
+					align := flag.String("align", "left", "alignment : center, right, left ...")
+					reverse := flag.String("reverse", "", "ASCII art to change back to text")
+					letters := flag.String("letter", "", "specific letters to color")
 
-				flag.Parse()
+					flag.Parse()
 
-				args := flag.Args()
+					args := flag.Args()
 
-				if len(args) < 1 {
-					fmt.Fprintf(os.Stderr, "Usage: go run . <--flag> <text> <banner>")
-					os.Exit(1)
-				}
+					if len(args) < 1 {
+						fmt.Fprintf(os.Stderr, "Usage: go run . <--flag> <text> <banner>")
+						os.Exit(1)
+					}
 
-				fmt.Println("output: ", *output)
-				fmt.Println("color: ", *color)
-				fmt.Println("align: ", *align)
-				fmt.Println("reverse: ", *reverse)
-				fmt.Println("letters: ", *letters)
-				fmt.Println(args)
-
-
-				var result strings.Builder
-				rows := []string{" _  _ ", "| || |", "|_||_|"}
-				for _, row := range rows{
-					result.WriteString(row)
-					result.WriteString("\n")
-				}
-				fmt.Print(result.String())
+					fmt.Println("output: ", *output)
+					fmt.Println("color: ", *color)
+					fmt.Println("align: ", *align)
+					fmt.Println("reverse: ", *reverse)
+					fmt.Println("letters: ", *letters)
+					fmt.Println(args)
 
 
-				content := " _  _ \n| || |\n|_||_|\n"
-				err:= os.WriteFile("art.txt", []byte(content), 0644)
-				if err != nil{
-					fmt.Fprintf(os.Stderr, "Error: writing to file %v\n", err)
-					os.Exit(1)
-				}
+					var result strings.Builder
+					rows := []string{" _  _ ", "| || |", "|_||_|"}
+					for _, row := range rows{
+						result.WriteString(row)
+						result.WriteString("\n")
+					}
+					fmt.Print(result.String())
 
-				data, err := os.ReadFile("art.txt")
-				if err != nil{
-					fmt.Fprintf(os.Stderr, "Error: reading file %v\n", err)
-					os.Exit(1)
-				}
 
-				fmt.Print(string(data))
+					content := " _  _ \n| || |\n|_||_|\n"
+					err:= os.WriteFile("art.txt", []byte(content), 0644)
+					if err != nil{
+						fmt.Fprintf(os.Stderr, "Error: writing to file %v\n", err)
+						os.Exit(1)
+					}
 
+					data, err := os.ReadFile("art.txt")
+					if err != nil{
+						fmt.Fprintf(os.Stderr, "Error: reading file %v\n", err)
+						os.Exit(1)
+					}
+
+					fmt.Print(string(data))
+
+
+					const (
+				    Red     = "\033[31m"
+				    Green   = "\033[32m"
+				    Yellow  = "\033[33m"
+				    Blue    = "\033[34m"
+				    Magenta = "\033[35m"
+				    Cyan    = "\033[36m"
+				    White   = "\033[37m"
+				    Reset   = "\033[0m"
+				)
 
 				const (
-			    Red     = "\033[31m"
-			    Green   = "\033[32m"
-			    Yellow  = "\033[33m"
-			    Blue    = "\033[34m"
-			    Magenta = "\033[35m"
-			    Cyan    = "\033[36m"
-			    White   = "\033[37m"
-			    Reset   = "\033[0m"
-			)
-
-			const (
-			    Red   = "\033[31m"
-			    Blue  = "\033[34m"
-			    Green = "\033[32m"
-			    Reset = "\033[0m"
-			)
+				    Red   = "\033[31m"
+				    Blue  = "\033[34m"
+				    Green = "\033[32m"
+				    Reset = "\033[0m"
+				)
 
 
-			fmt.Println(Red+ "Hello" + Reset)
-			fmt.Println(Blue+ "Hello" + Reset)
-			fmt.Println(Green+ "Hello" + Reset)
-			fmt.Println("Normal text")
+				fmt.Println(Red+ "Hello" + Reset)
+				fmt.Println(Blue+ "Hello" + Reset)
+				fmt.Println(Green+ "Hello" + Reset)
+				fmt.Println("Normal text")
 
 
-			colors := []string{Red, Green, Blue}
-			for i, ch := range "Hello" {
-			    color := colors[i%len(colors)]
-				fmt.Printf("%s%c%s",color,ch,Reset)
-			}
-			fmt.Println()
-
-			colorName := "red"
-			//colorName := "purple"
-			block, exist := colorMap[colorName]
-			if !exist{
-				fmt.Fprintf(os.Stderr, "Unknown color: %s\n", block)
-				os.Exit(1)
-			}else{
-				fmt.Printf("color code for red is \\033[31m\n")
-				fmt.Printf("%sHello%s\n",block, "\033[0m")
-			}
-
-
-			colorCode := "\033[31m"
-			letters   := "He"
-			reset     := "\033[0m"
-
-			for _, ch := range "Hello World"{
-				if letters == "" || strings.ContainsRune(letters, ch){
-					fmt.Printf("%s%c%s",colorCode, ch, reset)
-				}else{
-					fmt.Printf("%c", ch)
+				colors := []string{Red, Green, Blue}
+				for i, ch := range "Hello" {
+				    color := colors[i%len(colors)]
+					fmt.Printf("%s%c%s",color,ch,Reset)
 				}
+				fmt.Println()
+
+				colorName := "red"
+				//colorName := "purple"
+				block, exist := colorMap[colorName]
+				if !exist{
+					fmt.Fprintf(os.Stderr, "Unknown color: %s\n", block)
+					os.Exit(1)
+				}else{
+					fmt.Printf("color code for red is \\033[31m\n")
+					fmt.Printf("%sHello%s\n",block, "\033[0m")
+				}
+
+
+				colorCode := "\033[31m"
+				letters   := "He"
+				reset     := "\033[0m"
+
+				for _, ch := range "Hello World"{
+					if letters == "" || strings.ContainsRune(letters, ch){
+						fmt.Printf("%s%c%s",colorCode, ch, reset)
+					}else{
+						fmt.Printf("%c", ch)
+					}
+				}
+				fmt.Println()
+
+
+				// sd := []string{"hi", "hello", "world!"}
+				// 	fmt.Println(LongestValue(sd))
+
+				sp := Space(" ", 5)
+					fmt.Printf("%q\n",sp)
+
+
+			termWidth := 80
+			artWidth := 20
+			art := "***** HELLO *****"
+			r , l, c, j:= "right", "left","center","justify"
+
+			fmt.Println(alignText(art, r, termWidth, artWidth))
+			fmt.Println(alignText(art, l, termWidth, artWidth))
+			fmt.Println(alignText(art, c, termWidth, artWidth))
+			fmt.Println(alignText(art, j, termWidth, artWidth))
+
+
+		artWidth := 0
+
+		for _, ch := range "Hi" {
+			artWidth += len(banner[ch][0])
+
+		}
+
+		for row := 0; row < 8; row++ {
+			var arts strings.Builder
+			for _, a := range "Hi" {
+				arts.WriteString(banner[a][row])
 			}
-			fmt.Println()
 
+			content := alignText(arts.String(), "left", 80, artWidth)
 
-			// sd := []string{"hi", "hello", "world!"}
-			// 	fmt.Println(LongestValue(sd))
+			fmt.Println(content)
 
-			sp := Space(" ", 5)
-				fmt.Printf("%q\n",sp)
+		}
 
-
-		termWidth := 80
-		artWidth := 20
-		art := "***** HELLO *****"
-		r , l, c, j:= "right", "left","center","justify"
-
-		fmt.Println(alignText(art, r, termWidth, artWidth))
-		fmt.Println(alignText(art, l, termWidth, artWidth))
-		fmt.Println(alignText(art, c, termWidth, artWidth))
-		fmt.Println(alignText(art, j, termWidth, artWidth))
 	*/
 
-	artWidth := 0
+	input := "Hii"
+	var termWidth = 80
 
-	for _, ch := range "Hi" {
+	var artWidth = 0
+	for _, ch := range input {
 		artWidth += len(banner[ch][0])
 
 	}
 
+	var chars = []rune(input)
+	var totalChars = len([]rune(input))
+	var remainingSpace = termWidth - artWidth
+	var gaps = totalChars - 1
+	var spacePerGap = remainingSpace / gaps
+	var extraSpaces = remainingSpace % gaps
+
 	for row := 0; row < 8; row++ {
-		var arts strings.Builder
-		for _, a := range "Hi" {
-			arts.WriteString(banner[a][row])
+		var rawRow strings.Builder
+
+		for i, ch := range chars {
+			rawRow.WriteString(banner[ch][row])
+
+			if i < len(chars)-1 {
+				gapSize := spacePerGap
+				if i < extraSpaces {
+					gapSize++
+				}
+				rawRow.WriteString(strings.Repeat(" ", gapSize))
+			}
 		}
-
-		content := alignText(arts.String(), "center", 80, artWidth)
-
-		fmt.Println(content)
+		fmt.Println(rawRow.String())
 
 	}
 

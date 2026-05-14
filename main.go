@@ -11,12 +11,21 @@ func main() {
 	output := flag.String("output", "", "file to write output to")
 	color := flag.String("color", "", "colors: red, green, cyan ....")
 	letters := flag.String("letters", "", "specific letters to color")
-	_ = flag.String("align", "left", "alignment : center, right, left ...")
+	align := flag.String("align", "left", "alignment: left, right, center, justify")
 	_ = flag.String("reverse", "", "ASCII art to change back to text")
 
 	flag.Parse()
 
 	args := flag.Args()
+
+	validAligns := map[string]bool{
+		"left": true, "right": true,
+		"center": true, "justify": true,
+	}
+	if *align != "" && !validAligns[*align] {
+		fmt.Fprintf(os.Stderr, "unknown alignment: %s\n", *align)
+		os.Exit(1)
+	}
 
 	colorCode := ""
 	if *color != "" {
