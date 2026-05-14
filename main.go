@@ -12,11 +12,26 @@ func main() {
 	color := flag.String("color", "", "colors: red, green, cyan ....")
 	letters := flag.String("letters", "", "specific letters to color")
 	align := flag.String("align", "left", "alignment: left, right, center, justify")
-	_ = flag.String("reverse", "", "ASCII art to change back to text")
+	reverse := flag.String("reverse", "", "ASCII art to change back to text")
 
 	flag.Parse()
 
 	args := flag.Args()
+
+	if *reverse != ""{
+		charMap, err := LoadBanner("standard.txt")
+		if err != nil{
+			fmt.Fprintf(os.Stderr, "error: %v\n, err")
+			os.Exit(1)
+		}
+		result , err := Reverse(*reverse, charMap)
+		if err != nil{
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Println(result)
+		return
+	}
 
 	validAligns := map[string]bool{
 		"left": true, "right": true,
