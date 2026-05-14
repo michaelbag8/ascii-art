@@ -55,7 +55,7 @@ func main() {
 		return
 	}
 
-	content := Generate(input, data, colorCode, *letters)
+	content := Generate(input, data, colorCode, *letters, *align)
 
 	if *output != "" {
 		err := os.WriteFile(*output, []byte(content), 0644)

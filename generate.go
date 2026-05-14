@@ -6,12 +6,14 @@ import (
 	"strings"
 )
 
-func Generate(input string, banner map[rune][]string, colorCode string, letters string) string {
+func Generate(input string, banner map[rune][]string, colorCode string, letters string, align string) string {
 	if len(input) == 0 {
 		return ""
 	}
 	var output strings.Builder
 	segments := SplitInput(input)
+
+	
 
 	for i, segment := range segments {
 		if segment == "" {
@@ -20,6 +22,10 @@ func Generate(input string, banner map[rune][]string, colorCode string, letters 
 			}
 			continue
 		}
+artWidth := 0
+for _, ch := range segment {
+    artWidth += len(banner[ch][0])
+}
 
 		for _, ch := range segment {
 			if _, ok := banner[ch]; !ok {
@@ -28,7 +34,7 @@ func Generate(input string, banner map[rune][]string, colorCode string, letters 
 			}
 		}
 
-		rows := renderLines(segment, banner, colorCode, letters)
+		rows := renderLines(segment, banner, colorCode, letters, align)
 		for _, row := range rows {
 			output.WriteString(row)
 			output.WriteString("\n")
