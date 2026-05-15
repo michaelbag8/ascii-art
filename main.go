@@ -21,7 +21,7 @@ func main() {
 	if *reverse != ""{
 		charMap, err := LoadBanner("standard.txt")
 		if err != nil{
-			fmt.Fprintf(os.Stderr, "error: %v\n, err")
+			fmt.Fprintf(os.Stderr, "error: %v\n",err)
 			os.Exit(1)
 		}
 		result , err := Reverse(*reverse, charMap)

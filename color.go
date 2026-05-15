@@ -9,5 +9,3 @@ var colorMap = map[string]string{
 	"cyan":    "\033[36m",
 	"white":   "\033[37m",
 }
-
-const resetCode = "\033[0m"
