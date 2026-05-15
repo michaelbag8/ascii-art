@@ -9,3 +9,13 @@ var colorMap = map[string]string{
 	"cyan":    "\033[36m",
 	"white":   "\033[37m",
 }
+
+var cssColorMap = map[string]string{
+	"red":     "red",
+	"green":   "green",
+	"yellow":  "yellow",
+	"blue":    "blue",
+	"magenta": "magenta",
+	"cyan":    "cyan",
+	"white":   "white",
+}

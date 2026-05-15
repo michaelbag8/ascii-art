@@ -18,6 +18,11 @@ func main() {
 
 	args := flag.Args()
 
+	if len(args) > 0 && args[0] == "fs"{
+		startServer()
+		return
+	}
+
 	if *reverse != ""{
 		charMap, err := LoadBanner("standard.txt")
 		if err != nil{
