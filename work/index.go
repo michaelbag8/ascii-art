@@ -294,7 +294,7 @@ func main() {
 			fmt.Println(rawRow.String())
 
 		}
-	*/
+	
 	position := 0
 	var result strings.Builder
 
@@ -308,6 +308,12 @@ func main() {
 	}
 
 	fmt.Println(result.String())
+
+*/
+
+// go run . fs
+
+
 
 
 }
